@@ -1,121 +1,133 @@
 let questionArray = [
 	{
 		id: 1,
+		questionText: 'Minar e pakistan is situated in',
+		options: ['lahore', 'islamabad', 'karachi', 'peshawar'],
+		answer: 'lahore',
+	},
+	{
+		id: 2,
 		questionText: 'There are ______ gates of Lahore',
 		options: ['12', '11', '10', '09'],
 		answer: '12',
 	},
 	{
-		id: 2,
+		id: 3,
 		questionText: 'Pakistan has a total area of _____ square kilometers',
 		options: ['703,940', '803,940', '903,940', '103,940'],
 		answer: '803,940',
 	},
 	{
-		id: 3,
+		id: 4,
 		questionText: 'Pakistan has ____ Provices?',
 		options: ['one', 'two', 'three', 'four'],
 		answer: 'four',
 	},
 	{
-		id: 4,
+		id: 5,
 		questionText: 'Which one is the city of lights',
 		options: ['lahore', 'islamabad', 'karachi', 'peshawar'],
 		answer: 'karachi',
 	},
 	{
-		id: 5,
+		id: 6,
 		questionText: 'Antarctica is governed by about ___ countries,',
 		options: ['30', '40', '20', '10'],
 		answer: '30',
 	},
 	{
-		id: 6,
+		id: 7,
 		questionText: 'Since 2006, Hamas and Israel have fought ___ wars, ',
 		options: ['six', 'four', 'ten', 'nine'],
 		answer: 'four',
 	},
 	{
-		id: 7,
+		id: 8,
 		questionText: 'Palestine is occupied by',
 		options: ['usa', 'uk', 'africa', 'israel'],
 		answer: 'israel',
 	},
 	{
-		id: 8,
+		id: 9,
 		questionText: ' Indian Muslims launched the Khilafat Movement under the leadership of ',
 		options: ['Gandhi and Nehro', 'Mohammad Ali and Shaukat Ali', 'All', 'none'],
 		answer: 'Mohammad Ali and Shaukat Ali',
 	},
 	{
-		id: 9,
+		id: 10,
 		questionText: ' Which cancer is most common in Pakistan?',
 		options: ['Oral cavity', 'Gastrointestinal ', 'Both', 'none'],
 		answer: 'Both',
 	},
 ];
+var questionCount = 0;
+const quizWrapper = document.querySelector('.quiz');
+const quizContent = document.querySelector('.quiz-content');
+const quizQuestion = document.querySelector('.question');
+const quizOptions = document.querySelector('input');
+const radioInputs = document.querySelectorAll('input[type=radio]');
+// const quizClone = quizContent.cloneNode(true).classList.add('quiz-content');
+
+const submitButton = document.createElement('button');
+submitButton.textContent = 'submit';
+submitButton.setAttribute('type', 'submit');
+submitButton.disabled = true;
 
 main();
 
 function main() {
-	var questionCount = 0;
-	const quizWrapper = document.getElementById('quiz');
-	const quizContentWrapper = document.querySelector('.quiz-content');
-	const quizQuestion = document.querySelector('.question');
-	const quizOptions = document.querySelector('input');
-	const radioInputs = document.querySelectorAll('input[type=radio]');
-
-	const submitButton = document.createElement('button');
-	submitButton.textContent = 'submit';
-	submitButton.setAttribute('type', 'submit');
-	submitButton.disabled = true;
 	questionArray.forEach((question) => {
-		var quiz = quizWrapper.cloneNode(true);
-		var quizContent = quizContentWrapper.cloneNode(true);
+		var div1 = document.createElement('div');
+		div1.classList.add(['quiz']);
+		var div2 = document.createElement('div');
+		div2.classList.add(['quiz-content']);
 
-		quiz.classList.add(['quiz']);
-		quizContent.classList.add(['quiz-content']);
-
-		var heading = quizContent.querySelector('h2');
-		heading.innerHTML = question.questionText;
-		// quizContent.appendChild(heading);
-
-		// console.log('question', quizContent.appendChild(heading));
-
-		var unorderedList = document.querySelector('.quiz-content ul');
+		var heading = document.createElement('h2');
+		var headingText = document.createTextNode(question.questionText);
+		heading.classList.add('question');
+		heading.appendChild(headingText);
+		div1.appendChild(div2);
+		var ul = document.createElement('ul');
 
 		question.options.forEach((opt, index) => {
-			const labels = document.querySelector('.quiz-content label');
-			const inputs = document.querySelector('.quiz-content input');
-			const list = document.querySelector('.quiz-content li');
+			const li = document.createElement('li');
+			const label = document.createElement('label');
+			const input = document.createElement('input');
 
-			inputs.setAttribute('type', 'radio');
-			inputs.setAttribute('name', question.id);
-			inputs.value = opt;
-			// inputs.id = question.id + '-option-' + (index + 1);
-			labels.setAttribute('for', inputs.id);
-			labels.textContent = opt;
+			input.setAttribute('type', 'radio');
+			input.setAttribute('name', question.id);
+			input.value = opt;
+			input.id = question.id + '-option-' + (index + 1);
+			label.setAttribute('for', input.id);
+			label.textContent = opt;
 
-			unorderedList.appendChild(list).appendChild(labels).appendChild(inputs);
-			// quizContent.appendChild(unorderedList);
+			ul.appendChild(li).appendChild(label).appendChild(input);
 		});
 
-		quizContent.appendChild(heading);
+		div2.appendChild(heading);
+		div2.appendChild(ul);
+		div1.appendChild(div2);
 
-		// console.log('quizContent', quizContent);
-		document.body.appendChild(quiz).appendChild(quizContent);
-
-		document.body.appendChild(quiz).appendChild(submitButton);
+		document.body.appendChild(div1);
+		document.body.appendChild(div1).appendChild(submitButton);
 		checkIteration();
 	});
 }
-
 function checkIteration() {
 	for (let i = 0; i < questionArray.length; i++) {
 		let selected = document.getElementsByName(questionArray[i].id);
 		for (let items of selected) items.addEventListener('click', isAllSelected);
 	}
 }
+// function abc(event) {
+// 	if (event.target.classList.contains('answer')) {
+// 		isAllSelected();
+// 	}
+// }
+// function checkIteration() {
+// 	quizOptions.addEventListener('click', abc);
+// }
+
 function isAllSelected() {
 	let current = 0;
 	for (let j = 0; j < questionArray.length; j++) {
