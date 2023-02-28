@@ -1,60 +1,54 @@
 let questionArray = [
 	{
 		id: 1,
-		questionText: 'Minar e pakistan is situated in',
-		options: ['lahore', 'islamabad', 'karachi', 'peshawar'],
-		answer: 'lahore',
-	},
-	{
-		id: 2,
 		questionText: 'There are ______ gates of Lahore',
 		options: ['12', '11', '10', '09'],
 		answer: '12',
 	},
 	{
-		id: 3,
+		id: 2,
 		questionText: 'Pakistan has a total area of _____ square kilometers',
 		options: ['703,940', '803,940', '903,940', '103,940'],
 		answer: '803,940',
 	},
 	{
-		id: 4,
+		id: 3,
 		questionText: 'Pakistan has ____ Provices?',
 		options: ['one', 'two', 'three', 'four'],
 		answer: 'four',
 	},
 	{
-		id: 5,
+		id: 4,
 		questionText: 'Which one is the city of lights',
 		options: ['lahore', 'islamabad', 'karachi', 'peshawar'],
 		answer: 'karachi',
 	},
 	{
-		id: 6,
+		id: 5,
 		questionText: 'Antarctica is governed by about ___ countries,',
 		options: ['30', '40', '20', '10'],
 		answer: '30',
 	},
 	{
-		id: 7,
+		id: 6,
 		questionText: 'Since 2006, Hamas and Israel have fought ___ wars, ',
 		options: ['six', 'four', 'ten', 'nine'],
 		answer: 'four',
 	},
 	{
-		id: 8,
+		id: 7,
 		questionText: 'Palestine is occupied by',
 		options: ['usa', 'uk', 'africa', 'israel'],
 		answer: 'israel',
 	},
 	{
-		id: 9,
+		id: 8,
 		questionText: ' Indian Muslims launched the Khilafat Movement under the leadership of ',
 		options: ['Gandhi and Nehro', 'Mohammad Ali and Shaukat Ali', 'All', 'none'],
 		answer: 'Mohammad Ali and Shaukat Ali',
 	},
 	{
-		id: 10,
+		id: 9,
 		questionText: ' Which cancer is most common in Pakistan?',
 		options: ['Oral cavity', 'Gastrointestinal ', 'Both', 'none'],
 		answer: 'Both',
@@ -66,8 +60,6 @@ const quizContent = document.querySelector('.quiz-content');
 const quizQuestion = document.querySelector('.question');
 const quizOptions = document.querySelector('input');
 const radioInputs = document.querySelectorAll('input[type=radio]');
-// const quizClone = quizContent.cloneNode(true).classList.add('quiz-content');
-
 const submitButton = document.createElement('button');
 submitButton.textContent = 'submit';
 submitButton.setAttribute('type', 'submit');
@@ -119,15 +111,6 @@ function checkIteration() {
 		for (let items of selected) items.addEventListener('click', isAllSelected);
 	}
 }
-// function abc(event) {
-// 	if (event.target.classList.contains('answer')) {
-// 		isAllSelected();
-// 	}
-// }
-// function checkIteration() {
-// 	quizOptions.addEventListener('click', abc);
-// }
-
 function isAllSelected() {
 	let current = 0;
 	for (let j = 0; j < questionArray.length; j++) {
